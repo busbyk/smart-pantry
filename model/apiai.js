@@ -21,8 +21,11 @@ class Apiai {
                     'Authorization': `Bearer ${config.apiai.token}`
                 },
                 body: JSON.stringify({
-                    name: eventName,
-                    data: data
+                    event: {
+                        name: eventName,
+                        data: data
+                    },
+                    sessionId: this.sessionId
                 })
 
             };
