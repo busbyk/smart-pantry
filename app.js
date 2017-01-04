@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 
 // Require routes
 const index = require('./routes/index');
+const event = require('./routes/event');
 const pantryAnalyzer = require('./routes/pantryAnalyzer');
 
 // Load config
@@ -15,6 +16,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 // Declare routes
 app.use('/', index);
+app.use('/event', event);
 app.use('/pantryAnalyzer', pantryAnalyzer);
 
 // Start express server
