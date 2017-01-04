@@ -11,16 +11,37 @@ class Apiai {
         this.sessionId = sessionId || uuid.v4();
     }
 
-    triggerEvent() {
+    triggerEvent(eventName, data) {
       return new Promise((resolve, reject) => {
-        let url = this.generateUrl(utterance),
+        let url = BASE_URL + '/query',
             options = {
                 url: url,
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${config.apiai.token}`
-                }
+                },
+                body: JSON.stringify({
+                    name: eventName,
+                    data: data
+                })
+
             };
+
+          request.post(options, (err, res, body) => {
+              if(err) {
+                  reject(err);
+              } else {
+                  if(res.body) {
+                      let body = JSON.parse(res.body),
+                          result = body.result;
+
+                      resolve(result);
+                  } else {
+                      console.log('No body on the result');
+                      reject('No body on the result');
+                  }
+              }
+          });
 
         // request.post(options, (err, res, body) => {
         //     if(err) {
@@ -38,37 +59,6 @@ class Apiai {
         //     }
         // });
       });
-    }
-
-    recognizeIntent(utterance, context) {
-        return new Promise((resolve, reject) => {
-
-
-            if(config.systemId) {
-                if(config.systemId.proxyUrl) {
-                    options.proxy = config.systemId.proxyUrl;
-                } else {
-                    console.log('No proxyUrl defined for the ' + config.env + ' environment.');
-                }
-            } else {
-                console.log('No systemId configuration for the ' + config.env + ' environment.');
-            }
-
-
-
-        });
-    }
-
-    generateUrl(utterance) {
-        let url = `${BASE_URL}/query?v=${VERSION}&lang=${LANG}`;
-
-        if(utterance) {
-            url += `&query=${utterance}`;
-        }
-
-        url += `&sessionId=${this.sessionId}`;
-
-        return url;
     }
 }
 

@@ -17,13 +17,18 @@ router.post('/', function(req, res) {
 		return res.status(400).send('No event name on the request');
 	}
 
-	if(intentEventNames.includes(eventName) || genericEventNames.includes(eventName)) {
-		responseText = 'valid event';
+	if(intentEventNames.includes(eventName)) {
+		let apiai = new Apiai;
+		apiai.triggerEvent(eventName).then((result) => {
+			return res.status(200).send(result);
+		}).catch(err => {
+			return res.status(500).send(err);
+		})
+	} else if (genericEventNames.includes(eventName)) {
+
 	} else {
 		return res.status(400).send(eventName + ' is not a valid event name.');
 	}
-
-	res.send(responseText || 'uh oh something went wrong');
 });
 
 module.exports = router;
