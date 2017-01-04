@@ -55,7 +55,13 @@ app.use('/hook', (req, res) => {
 
 	sessionId = body.id;
 	console.log('successfully set sessionId');
-	res.send('sessionId set');
+	res.json({
+		speech: "Hi, welcome to SmartPantry. I'm going to ask you a few questions to help set up. Do you want to opt in for healthy eating suggestions?",
+		displayText: "Hi, welcome to SmartPantry. I'm going to ask you a few questions to help set up. Do you want to opt in for healthy eating suggestions?",
+		data: '',
+		contextOut: '',
+		source: ''
+	});
 });
 app.use('/pantryAnalyzer', pantryAnalyzer);
 
