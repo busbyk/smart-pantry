@@ -17,6 +17,8 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
+app.set('port', config.port);
+
 const intentEventNames = ['dinner-time', 'item-will-expire-soon', 'new-item-purchased', 'notices-unhealthy-eating-habits', 'open-cabinet'];
 const genericEventNames = ['item-used'];
 let sessionId;
