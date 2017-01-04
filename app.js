@@ -64,7 +64,7 @@ const ExpirationWatcher = require('./model/ExpirationWatcher');
 let expirationWatcher = new ExpirationWatcher();
 
 // Start express server
-app.listen(config.port, () => {
+app.listen(process.env.PORT || config.port, () => {
 	console.log(`Server listening on port ${config.port}`);
 });
 
