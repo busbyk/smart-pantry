@@ -1,13 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const passport = require('passport');
-const BasicStrategy = require('passport-http').BasicStrategy;
-const ADAuth = require('./model/ADAuth');
 
 // Require routes
 const index = require('./routes/index');
-const authRoute = require('./routes/authenticatedRoute');
-const unauthRoute = require('./routes/unauthenticatedRoute');
+const pantryAnalyzer = require('./routes/pantryAnalyzer');
 
 // Load config
 const config = require('./config');
@@ -17,16 +13,9 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-// Initialize passport and authenticate function
-passport.use(new BasicStrategy((username, password, done) => {
-	let adAuth = new ADAuth();
-	return adAuth.bind(username, password, done);
-}));
-
 // Declare routes
 app.use('/', index);
-app.use('/authenticatedRoute', passport.authenticate('basic', { session: false }), authRoute);
-app.use('/unauthenticatedRoute', unauthRoute);
+app.use('/pantryAnalyzer', pantryAnalyzer);
 
 // Start express server
 app.listen(config.port, () => {
