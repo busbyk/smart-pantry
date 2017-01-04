@@ -18,7 +18,7 @@ router.post('/', function(req, res) {
 	}
 
 	if(intentEventNames.includes(eventName)) {
-		let apiai = new Apiai;
+		let apiai = new Apiai();
 		apiai.triggerEvent(eventName).then((result) => {
 			return res.status(200).send(result);
 		}).catch(err => {
