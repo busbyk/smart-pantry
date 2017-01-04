@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const _ = require('lodash');
-const Apiai = require('./model/Apiai');
+const Apiai = require('./model/apiai');
 
 // Require routes
 const index = require('./routes/index');

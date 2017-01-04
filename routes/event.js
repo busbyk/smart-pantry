@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const _ = require('lodash');
-const Apiai = require('../model/Apiai');
+const Apiai = require('../model/apiai');
 
 const intentEventNames = ['dinner-time', 'item-will-expire-soon', 'new-item-purchased', 'notices-unhealthy-eating-habits', 'open-cabinet'];
 const genericEventNames = ['item-used'];
