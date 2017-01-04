@@ -1,0 +1,22 @@
+{
+  "name": "pantry-bot",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A simple NodeJS bot for detecting what you have in your pantry.",
+  "main": "app.js",
+  "engines": {
+    "node": "6.3.1"
+  },
+  "scripts": {
+    "start": "node app",
+    "test": "jasmine-node spec --junitreport --output ./test-reports/",
+    "test-local": "jasmine-node spec --config NODE_ENV local"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0"
+  },
+  "devDependencies": {
+    "jasmine-node": "^1.14.5"
+  }
+}
